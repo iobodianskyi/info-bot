@@ -12,6 +12,10 @@
 
   telegramBot.start();
 
+  // enable routes
+  const apiRoutes = require('./api-routes');
+  server.use(apiRoutes);
+
   const httpServer = http.createServer(server);
 
   const port = +config.port;
