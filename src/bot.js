@@ -38,7 +38,7 @@
   }
 
   sendMessage = (message, options) => {
-    telegram.sendMessage(state.app.myTelegramUserId, message, options);
+    telegram.sendMessage(config.myTelegramUserId, message, options);
   }
 
   const bot = {
