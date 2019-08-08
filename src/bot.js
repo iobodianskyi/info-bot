@@ -2,14 +2,14 @@
   const Telegraf = require('telegraf');
   const Telegram = require('telegraf/telegram');
 
-  const config = require('../config.json');
+  const constants = require('./constants');
 
   let telegram;
   let telegramBot;
 
   start = () => {
-    telegram = new Telegram(config.token);
-    telegramBot = new Telegraf(config.token);
+    telegram = new Telegram(constants.app.telegram.infoBotToken);
+    telegramBot = new Telegraf(constants.app.telegram.infoBotToken);
 
     const commands = {
       ping: 'ping'
@@ -38,7 +38,7 @@
   }
 
   sendMessage = (message, options) => {
-    telegram.sendMessage(config.myTelegramUserId, message, options);
+    telegram.sendMessage(constants.telegram.myTelegramUserId, message, options);
   }
 
   const bot = {
