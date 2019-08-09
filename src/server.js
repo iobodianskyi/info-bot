@@ -27,7 +27,7 @@
   // get app info
   request(constants.projectInfoUrl, { qs: { id: constants.projectId }, json: true }, (error, responce, body) => {
 
-    constants.app.port = body.nodeAppPorts.infoBot;
+    constants.app.port = body.port;
     constants.app.telegram = body.telegram;
 
     telegramBot.start();
