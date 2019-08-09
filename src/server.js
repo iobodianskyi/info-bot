@@ -8,8 +8,11 @@
   const telegramBot = require('./bot');
   const constants = require('./constants');
 
+  const cors = require('cors')({origin: ['http://localhost', 'https://notes.obodianskyi.com']});
+
   server.use(bodyParser.json()); // support json encoded bodies
   server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+  server.use(cors);
 
   // enable routes
   const apiRoutes = require('./api-routes');
