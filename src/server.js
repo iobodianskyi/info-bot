@@ -1,15 +1,13 @@
-(function () {
+(() => {
+  'use strict';
+
   const http = require('http');
   const express = require('express');
   const server = express();
-  const bodyParser = require('body-parser');
   const request = require('request');
 
   const telegramBot = require('./bot');
   const constants = require('./constants');
-
-  // server.use(bodyParser.json()); // support json encoded bodies
-  server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
   // const cors = require('cors')({ origin: ['http://localhost:4200', 'https://notes.obodianskyi.com'] });
   // server.use(cors);
@@ -18,7 +16,7 @@
   const apiRoutes = require('./api-routes');
   server.use(apiRoutes);
 
-  startServer = (bot) => {
+  const startServer = (bot) => {
     server.use(bot.webhookCallback('/webhook'));
     bot.telegram.setWebhook('https://info-bot.obodianskyi.com/webhook');
 
@@ -38,4 +36,4 @@
     // start server
     startServer(bot);
   });
-}());
+})();
