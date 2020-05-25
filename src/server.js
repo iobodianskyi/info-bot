@@ -5,10 +5,12 @@
   const express = require('express');
   const server = express();
   const request = require('request');
+  const bodyParser = require('body-parser');
 
   const telegramBot = require('./bot');
   const constants = require('./constants');
 
+  server.use(bodyParser.json({ type: 'application/*+json' }))
   // const cors = require('cors')({ origin: ['http://localhost:4200', 'https://notes.obodianskyi.com'] });
   // server.use(cors);
 
