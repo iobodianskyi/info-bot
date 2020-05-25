@@ -36,9 +36,11 @@
     // commands
     telegramBot.command(commands.ping, ({ reply }) => reply(messages.ping));
 
-    telegramBot.startPolling();
+    // telegramBot.startPolling();
 
     sendMessage(messages.started);
+
+    return telegramBot;
   }
 
   sendMessage = (message, options) => {

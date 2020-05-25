@@ -8,9 +8,9 @@
   const telegramBot = require('./bot');
   const constants = require('./constants');
 
-  const cors = require('cors')({origin: ['http://localhost:4200', 'https://notes.obodianskyi.com']});
+  const cors = require('cors')({ origin: ['http://localhost:4200', 'https://notes.obodianskyi.com'] });
 
-  server.use(bodyParser.json()); // support json encoded bodies
+  // server.use(bodyParser.json()); // support json encoded bodies
   server.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
   server.use(cors);
 
@@ -18,7 +18,10 @@
   const apiRoutes = require('./api-routes');
   server.use(apiRoutes);
 
-  startServer = () => {
+  startServer = (bot) => {
+    server.use(bot.webhookCallback('/webhook'));
+    bot.telegram.setWebhook('https://info-bot.obodianskyi.com/webhook');
+
     const httpServer = http.createServer(server);
     httpServer.listen(constants.app.port);
     console.log(`Server started on ${httpServer.address().port}`);
@@ -30,9 +33,9 @@
     constants.app.port = body.port;
     constants.app.telegram = body.telegram;
 
-    telegramBot.start();
+    const bot = telegramBot.start();
 
     // start server
-    startServer();
+    startServer(bot);
   });
 }());
