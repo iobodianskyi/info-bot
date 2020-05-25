@@ -19,13 +19,15 @@
     // ping - Is online...
 
     const messages = {
-      welcome: '🤗 Welcome to info bot !',
-      ping: '🏓 pong'
+      started: 'Bot started 🚀',
+      welcome: '🤗 Welcome to info bot!',
+      ping: '🏓 pong',
+      error: 'Ooops! an error occured: '
     };
 
     telegramBot.catch((err) => {
-      console.log('Ooops! an error occured: ', err)
-    })
+      console.log(messages.error, err)
+    });
 
     telegramBot.start((ctx) => {
       return ctx.reply(messages.welcome);
@@ -34,7 +36,11 @@
     // commands
     telegramBot.command(commands.ping, ({ reply }) => reply(messages.ping));
 
-    telegramBot.startPolling();
+    // telegramBot.startPolling();
+
+    sendMessage(messages.started);
+
+    return telegramBot;
   }
 
   sendMessage = (message, options) => {
