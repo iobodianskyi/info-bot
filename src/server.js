@@ -11,8 +11,9 @@
   const constants = require('./constants');
 
   server.use(bodyParser.json({ type: 'application/*+json' }))
-  // const cors = require('cors')({ origin: ['http://localhost:4200', 'https://notes.obodianskyi.com'] });
-  // server.use(cors);
+  
+  const cors = require('cors')();
+  server.use(cors);
 
   // enable routes
   const apiRoutes = require('./api-routes');
