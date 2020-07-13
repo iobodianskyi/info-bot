@@ -7,11 +7,12 @@
   const request = require('request');
   const bodyParser = require('body-parser');
 
+  const auth = require('./auth');
   const telegramBot = require('./bot');
   const constants = require('./constants');
 
   server.use(bodyParser.json({ type: 'application/*+json' }))
-  
+
   const cors = require('cors')();
   server.use(cors);
 
@@ -29,8 +30,13 @@
   }
 
   // get app info
-  request(constants.projectInfoUrl, { qs: { id: constants.projectId }, json: true }, (error, responce, body) => {
-
+  const token = auth.getAuthToken();
+  request(constants.projectInfoUrl, {
+    qs: { id: constants.projectId },
+    auth: {
+      'bearer': token
+    }, json: true
+  }, (error, responce, body) => {
     constants.app.port = body.port;
     constants.app.telegram = body.telegram;
 
